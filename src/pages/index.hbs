@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    
+    <!-- 
+      This is the main Handlebars template for the site 
+      - When the user visits the homepage or submits a color the app calls the endpoints in server.js
+      - The server script passes data in here and the Handlebars code builds it into the HTML page
+    -->
+    
+    <meta charset="utf-8" />
+    <link rel="icon" href="https://glitch.com/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>{{seo.title}}</title>
+    
+    <!-- Meta tags for SEO and social sharing -->
+    <link rel="canonical" href="{{seo.url}}">
+    <meta name="description" content="{{seo.description}}">
+    <meta property="og:title" content="{{seo.title}}">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="{{seo.url}}">
+    <meta property="og:description" content="{{seo.description}}">
+    <meta property="og:image" content="{{seo.image}}">
+    <meta name="twitter:card" content="summary">
+
+    <!-- Import the webpage's stylesheet -->
+    <link rel="stylesheet" href="/style.css" />
+    <script src="./lib/socket.io.js"></script>
+    <script src="./lib/Tone.min.js"></script>
+    <script src="./lib/p5.min.js"></script>
+    <script src="./lib/maia-gui.js"></script>
+    <script src="./lib/maia-util.js"></script>
+    <script src="./client.js" defer></script>
+    <script src="./tmp/co_Perez_Allegro(DóM)_patt.js"></script>
+    <script src="./tmp/co_Perez_Allegro(DóM)_patt_Tom.js"></script>
+    <script src="./tmp/co_Mesquita.js"></script>
+    <script src="./tmp/co_Mesquita_Tom.js"></script>
+    <script src="./tmp/co_Piece-A_clean.js"></script>
+    <script src="./tmp/co_Gomes-da-Silva_Allegro_clean.js"></script>
+    <script src="./tmp/co_Perez_Allegro(DóM)_patt_step1.js"></script>
+    <script src="./tmp/co_Gomes-da-Silva_Allegro_clean_step1.js"></script>
+    <script src="./tmp/co_Mesquita_step1.js"></script>
+    <script src="./tmp/co_801.js"></script>
+    <script src="./tmp/hier.js"></script>
+
+    <!-- This is a handlebars IF statement
+         Checking for a custom "color" parameter from server.js -->
+      
+  </head>
+  <body>
+    <div class="wrapper">
+      <div class="content" role="main">
+        
+        <!-- This is the start of content for our page -->
+        <h1 class="title">Repetitive Pattern Visualiser</h1>
+        <br/>
+        
+        
+        
+        <div id="theMainThing" class="color-form">
+          <p>
+            This page is used to visualise repetitive patterns in Portugese music.
+          </p>
+          <!-- An example -->
+          <!-- Enter your email address:
+          <br/>
+          <input id="emailAddr2" name="emailAddr" required="required" type="text">
+          <button type="submit" onclick="client.generate_magic_link()">Submit</button> -->
+        </div>
+        <br/>
+        
+        <div id="songSelection" class="color-form">
+          Input a keyword (i.e., Perez_motif, Mesquita_motif, GomesAllegro_motif, Perez_3step, Mesquita_3step, GomesAllegro_3step) to select a song:
+          <br/>
+          <!-- <input id="songNum" name="songNum" required="required" type="text">
+          <button type="submit" onclick="client.change_piece_new()">Change piece</button> -->
+        </div>
+        <br/><br/><br/><br/><br/>
+        <div id="occSelection" class="color-form">
+          Input a number to select a repetitive pattern (starting at 0):
+          <br/>
+          <!-- <input id="songNum" name="songNum" required="required" type="text">
+          <button type="submit" onclick="client.change_piece_new()">Change piece</button> -->
+        </div>
+        <br/><br/><br/><br/><br/>
+        
+        <div id="lovelySketch" class="Sthg">
+        </div>
+
+        </div>
+<!--         <div id="mySequencer" class="Sthg"></div> -->
+        <br/>
+        
+        <div class="illo-container">
+<!--           <img src="https://cdn.glitch.com/c62efef6-1e75-45cf-b248-afeccdda9477%2Fillustration.svg?v=1618196069568" class="illustration" alt="Node logo" /> -->
+        </div>
+        
+        <!-- Instructions on using this project -->
+<!--         <div class="instructions">
+          <h2>
+            Using this project
+          </h2>
+          <p>
+            This is the Glitch <strong>Hello Node</strong> project. You can
+            use it to build your own app. Check out README.md in the editor for
+            more info and next steps you can take!
+          </p>
+        </div> -->
+        
+<!--       </div> -->
+    </div>
+    <!-- The footer holds our remix button — you can use it for structure or cut it out ✂ -->
+    <footer class="footer">
+      <div class="color-form">
+        This interface was designed and implemented by Chenyu Gao and Tom Collins from the
+        <a href="https://tomcollinsresearch.net" target="_blank">Music Computing and Psychology Lab</a> at
+        <a href="https://york.ac.uk" target="_blank">University of York</a>. We make use of and extend a library called
+        <a href="https://musicintelligence.co/api/maia-gui/" target="_blank">MAIA GUI</a>.
+      </div>
+<!--       <div class="links"></div> -->
+<!--       <a
+        class="btn--remix"
+        target="_top"
+        href="https://glitch.com/edit/#!/remix/glitch-hello-node"
+      >
+        <img
+          src="https://cdn.glitch.com/605e2a51-d45f-4d87-a285-9410ad350515%2FLogo_Color.svg?v=1618199565140"
+          alt=""
+        />
+        Remix on Glitch
+      </a> -->
+    </footer>
+  </body>
+</html>
