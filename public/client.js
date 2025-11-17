@@ -290,21 +290,6 @@ class Visual {
       self.param.songName = 'Gomes da Silva\'s Minuet'
       self.param.hier = self.param.compObj.layer[self.param.compObj.layer.length -1][0]
     }
-    else if(songName === 'GomesAllegro_motif'){
-      self.param.compObj = co_GSA_motif
-      self.param.songName = 'Gomes da Silva\'s Allegro'
-      self.param.hier = self.param.compObj.layer[self.param.compObj.layer.length -1][0]
-    }
-    if(songName === 'Perez_motif'){
-      self.param.compObj = co_PA_motif
-      self.param.songName = "Perez_Allegro"
-      self.param.hier = self.param.compObj.layer[self.param.compObj.layer.length -1][0]
-    }
-    else if(songName === 'Mesquita_motif'){
-      self.param.compObj = co_MS_motif
-      self.param.songName = 'Mesquita_Sonata'
-      self.param.hier = self.param.compObj.layer[self.param.compObj.layer.length -1][0]
-    }
     self.render()
   }
   
