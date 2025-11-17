@@ -26,34 +26,42 @@ fastify.register(require("point-of-view"), {
 
 fastify.register(require("fastify-socket.io"))
 
-// Load and parse SEO data
-const seo = require("./src/seo.json");
-if (seo.url === "glitch-default") {
-  seo.url = `https://${process.env.PROJECT_DOMAIN}.glitch.me`;
-}
+const express = require('express');
+const app = express();
 
-/**
- * Our home page route
- *
- * Returns src/pages/index.hbs with data built into it
- */
-let siteVisits = 0
-fastify.get("/", function (request, reply) {
-  // params is an object we'll pass to our handlebars template
-  // siteVisits = siteVisits + 1
-  siteVisits++
-  console.log("siteVisits:", siteVisits)
-  
-  if(request.headers["x-forwarded-for"]){
-    const ip = request.headers['x-forwarded-for'].split(",")[0]
-    console.log("ip:", ip)
-  }
-  
-  let params = { seo: seo }
+app.set('view engine', 'hbs');
+app.set('views', path.join(__dirname, 'src/pages/index.hbs'));
+app.use(express.static(path.join(__dirname, 'public')));
 
-  // The Handlebars code will be able to access the parameter values and build them into the page
-  return reply.view("./src/pages/index.hbs", params);
-})
+
+// // Load and parse SEO data
+// const seo = require("./src/seo.json");
+// if (seo.url === "glitch-default") {
+//   seo.url = `https://${process.env.PROJECT_DOMAIN}.glitch.me`;
+// }
+
+// /**
+//  * Our home page route
+//  *
+//  * Returns src/pages/index.hbs with data built into it
+//  */
+// let siteVisits = 0
+// fastify.get("/", function (request, reply) {
+//   // params is an object we'll pass to our handlebars template
+//   // siteVisits = siteVisits + 1
+//   siteVisits++
+//   console.log("siteVisits:", siteVisits)
+  
+//   if(request.headers["x-forwarded-for"]){
+//     const ip = request.headers['x-forwarded-for'].split(",")[0]
+//     console.log("ip:", ip)
+//   }
+  
+//   let params = { seo: seo }
+
+//   // The Handlebars code will be able to access the parameter values and build them into the page
+//   return reply.view("/src/pages/index.hbs", params);
+// })
 
 /**
  * Our routes
