@@ -290,11 +290,247 @@ class Visual {
       self.param.songName = 'Gomes da Silva\'s Minuet'
       self.param.hier = self.param.compObj.layer[self.param.compObj.layer.length -1][0]
     }
+    else if(songName === 'A1'){
+      self.param.compObj = a1
+      self.param.songName = 'A-1'
+      self.param.hier = self.param.compObj.layer[self.param.compObj.layer.length -1][0]
+    }
+    else if(songName === 'A2'){
+      self.param.compObj = a2
+      self.param.songName = 'A-2'
+      self.param.hier = self.param.compObj.layer[self.param.compObj.layer.length -1][0]
+    }
+    else if(songName === 'A3'){
+      self.param.compObj = a3
+      self.param.songName = 'A-3'
+      self.param.hier = self.param.compObj.layer[self.param.compObj.layer.length -1][0]
+    }
+    else if(songName === 'A4'){
+      self.param.compObj = a4
+      self.param.songName = 'A-4'
+      self.param.hier = self.param.compObj.layer[self.param.compObj.layer.length -1][0]
+    }
+    else if(songName === 'A5'){
+      self.param.compObj = a5
+      self.param.songName = 'A-5'
+      self.param.hier = self.param.compObj.layer[self.param.compObj.layer.length -1][0]
+    }
+    else if(songName === 'A6'){
+      self.param.compObj = a6
+      self.param.songName = 'A-6'
+      self.param.hier = self.param.compObj.layer[self.param.compObj.layer.length -1][0]
+    }
+    else if(songName === 'A7'){
+      self.param.compObj = a7
+      self.param.songName = 'A-7'
+      self.param.hier = self.param.compObj.layer[self.param.compObj.layer.length -1][0]
+    }
+    else if(songName === 'A8'){
+      self.param.compObj = a8
+      self.param.songName = 'A-8'
+      self.param.hier = self.param.compObj.layer[self.param.compObj.layer.length -1][0]
+    }
+    else if(songName === 'A9'){
+      self.param.compObj = a9
+      self.param.songName = 'A-9'
+      self.param.hier = self.param.compObj.layer[self.param.compObj.layer.length -1][0]
+    }
     else if(songName === 'A10'){
       self.param.compObj = a10
       self.param.songName = 'A-10'
       self.param.hier = self.param.compObj.layer[self.param.compObj.layer.length -1][0]
     }
+    else if(songName === 'A11'){
+      self.param.compObj = a11
+      self.param.songName = 'A-11'
+      self.param.hier = self.param.compObj.layer[self.param.compObj.layer.length -1][0]
+    }
+    else if(songName === 'A12'){
+      self.param.compObj = a12
+      self.param.songName = 'A-12'
+      self.param.hier = self.param.compObj.layer[self.param.compObj.layer.length -1][0]
+    }
+    else if(songName === 'A13'){
+      self.param.compObj = a13
+      self.param.songName = 'A-13'
+      self.param.hier = self.param.compObj.layer[self.param.compObj.layer.length -1][0]
+    }
+    else if(songName === 'A14'){
+      self.param.compObj = a14
+      self.param.songName = 'A-14'
+      self.param.hier = self.param.compObj.layer[self.param.compObj.layer.length -1][0]
+    }
+    else if(songName === 'A15'){
+      self.param.compObj = a15
+      self.param.songName = 'A-15'
+      self.param.hier = self.param.compObj.layer[self.param.compObj.layer.length -1][0]
+    }
+    else if(songName === 'A16'){
+      self.param.compObj = a16
+      self.param.songName = 'A-16'
+      self.param.hier = self.param.compObj.layer[self.param.compObj.layer.length -1][0]
+    }
+    else if(songName === 'A17'){
+      self.param.compObj = a17
+      self.param.songName = 'A-17'
+      self.param.hier = self.param.compObj.layer[self.param.compObj.layer.length -1][0]
+    }
+    else if(songName === 'A18'){
+      self.param.compObj = a18
+      self.param.songName = 'A-18'
+      self.param.hier = self.param.compObj.layer[self.param.compObj.layer.length -1][0]
+    }
+    else if(songName === 'A19'){
+      self.param.compObj = a19
+      self.param.songName = 'A-19'
+      self.param.hier = self.param.compObj.layer[self.param.compObj.layer.length -1][0]
+    }
+    else if(songName === 'A20'){
+      self.param.compObj = a20
+      self.param.songName = 'A-20'
+      self.param.hier = self.param.compObj.layer[self.param.compObj.layer.length -1][0]
+    }
+    else if(songName === 'A21'){
+      self.param.compObj = a21
+      self.param.songName = 'A-21'
+      self.param.hier = self.param.compObj.layer[self.param.compObj.layer.length -1][0]
+    }
+    else if(songName === 'A22'){
+      self.param.compObj = a22
+      self.param.songName = 'A-22'
+      self.param.hier = self.param.compObj.layer[self.param.compObj.layer.length -1][0]
+    }
+    else if(songName === 'A23'){
+      self.param.compObj = a23
+      self.param.songName = 'A-23'
+      self.param.hier = self.param.compObj.layer[self.param.compObj.layer.length -1][0]
+    }
+    else if(songName === 'A24'){
+      self.param.compObj = a24
+      self.param.songName = 'A-24'
+      self.param.hier = self.param.compObj.layer[self.param.compObj.layer.length -1][0]
+    }
+    else if(songName === 'A25'){
+      self.param.compObj = a25
+      self.param.songName = 'A-25'
+      self.param.hier = self.param.compObj.layer[self.param.compObj.layer.length -1][0]
+    }
+    else if(songName === 'A26'){
+      self.param.compObj = a26
+      self.param.songName = 'A-26'
+      self.param.hier = self.param.compObj.layer[self.param.compObj.layer.length -1][0]
+    }
+    else if(songName === 'A27'){
+      self.param.compObj = a27
+      self.param.songName = 'A-27'
+      self.param.hier = self.param.compObj.layer[self.param.compObj.layer.length -1][0]
+    }
+    else if(songName === 'A28'){
+      self.param.compObj = a28
+      self.param.songName = 'A-28'
+      self.param.hier = self.param.compObj.layer[self.param.compObj.layer.length -1][0]
+    }
+    else if(songName === 'A29'){
+      self.param.compObj = a29
+      self.param.songName = 'A-29'
+      self.param.hier = self.param.compObj.layer[self.param.compObj.layer.length -1][0]
+    }
+    else if(songName === 'A30'){
+      self.param.compObj = a30
+      self.param.songName = 'A-30'
+      self.param.hier = self.param.compObj.layer[self.param.compObj.layer.length -1][0]
+    }
+    else if(songName === 'A31'){
+      self.param.compObj = a31
+      self.param.songName = 'A-31'
+      self.param.hier = self.param.compObj.layer[self.param.compObj.layer.length -1][0]
+    }
+    else if(songName === 'A32'){
+      self.param.compObj = a32
+      self.param.songName = 'A-32'
+      self.param.hier = self.param.compObj.layer[self.param.compObj.layer.length -1][0]
+    }
+    else if(songName === 'A33'){
+      self.param.compObj = a33
+      self.param.songName = 'A-33'
+      self.param.hier = self.param.compObj.layer[self.param.compObj.layer.length -1][0]
+    }
+    else if(songName === 'A34'){
+      self.param.compObj = a34
+      self.param.songName = 'A-34'
+      self.param.hier = self.param.compObj.layer[self.param.compObj.layer.length -1][0]
+    }
+    else if(songName === 'A35'){
+      self.param.compObj = a35
+      self.param.songName = 'A-35'
+      self.param.hier = self.param.compObj.layer[self.param.compObj.layer.length -1][0]
+    }
+    else if(songName === 'C1'){
+      self.param.compObj = c1
+      self.param.songName = 'C-1'
+      self.param.hier = self.param.compObj.layer[self.param.compObj.layer.length -1][0]
+    }
+    else if(songName === 'C2'){
+      self.param.compObj = c2
+      self.param.songName = 'C-2'
+      self.param.hier = self.param.compObj.layer[self.param.compObj.layer.length -1][0]
+    }
+    else if(songName === 'C3'){
+      self.param.compObj = c3
+      self.param.songName = 'C-3'
+      self.param.hier = self.param.compObj.layer[self.param.compObj.layer.length -1][0]
+    }
+    else if(songName === 'C4'){
+      self.param.compObj = c4
+      self.param.songName = 'C-4'
+      self.param.hier = self.param.compObj.layer[self.param.compObj.layer.length -1][0]
+    }
+    else if(songName === 'C5'){
+      self.param.compObj = c5
+      self.param.songName = 'C-5'
+      self.param.hier = self.param.compObj.layer[self.param.compObj.layer.length -1][0]
+    }
+    else if(songName === 'C6'){
+      self.param.compObj = c6
+      self.param.songName = 'C-6'
+      self.param.hier = self.param.compObj.layer[self.param.compObj.layer.length -1][0]
+    }
+    else if(songName === 'C7'){
+      self.param.compObj = c7
+      self.param.songName = 'C-7'
+      self.param.hier = self.param.compObj.layer[self.param.compObj.layer.length -1][0]
+    }
+    else if(songName === 'C8'){
+      self.param.compObj = c8
+      self.param.songName = 'C-8'
+      self.param.hier = self.param.compObj.layer[self.param.compObj.layer.length -1][0]
+    }
+    else if(songName === 'C9'){
+      self.param.compObj = c9
+      self.param.songName = 'C-9'
+      self.param.hier = self.param.compObj.layer[self.param.compObj.layer.length -1][0]
+    }
+    else if(songName === 'C10'){
+      self.param.compObj = c10
+      self.param.songName = 'C-10'
+      self.param.hier = self.param.compObj.layer[self.param.compObj.layer.length -1][0]
+    }
+    else if(songName === 'C11'){
+      self.param.compObj = c11
+      self.param.songName = 'C-11'
+      self.param.hier = self.param.compObj.layer[self.param.compObj.layer.length -1][0]
+    }
+    else if(songName === 'C12'){
+      self.param.compObj = c12
+      self.param.songName = 'C-12'
+      self.param.hier = self.param.compObj.layer[self.param.compObj.layer.length -1][0]
+    }
+    else if(songName === 'C13'){
+      self.param.compObj = c13
+      self.param.songName = 'C-13'
+      self.param.hier = self.param.compObj.layer[self.param.compObj.layer.length -1][0]
+    }
+
     self.render()
   }
   
