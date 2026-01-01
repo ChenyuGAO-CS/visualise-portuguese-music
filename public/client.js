@@ -290,6 +290,11 @@ class Visual {
       self.param.songName = 'Gomes da Silva\'s Minuet'
       self.param.hier = self.param.compObj.layer[self.param.compObj.layer.length -1][0]
     }
+    else if(songName === 'A10'){
+      self.param.compObj = a10
+      self.param.songName = 'A-10'
+      self.param.hier = self.param.compObj.layer[self.param.compObj.layer.length -1][0]
+    }
     self.render()
   }
   
