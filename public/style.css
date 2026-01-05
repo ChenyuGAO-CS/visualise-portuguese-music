@@ -19,6 +19,21 @@ to this section's matching END comment to see page-specific styles.
   --pendular-bg: #2e261f
 }
 
+/* Mobile Phone */
+@media (max-width: 768px) {
+  .container { width: 100%; }
+}
+
+/* iPad */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .container { width: 750px; }
+}
+
+/* Desktop */
+@media (min-width: 1025px) {
+  .container { width: 1200px; }
+}
+
 /* Basic page style resets */
 * {
   box-sizing: border-box;
