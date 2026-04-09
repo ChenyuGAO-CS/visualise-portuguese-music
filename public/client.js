@@ -865,10 +865,10 @@ class Visual {
       });
 
       if (noteName.includes("#")) {
-        staveNote.addModifier(new VF.Accidental("#"), 0);
+        staveNote.addModifier(0, new VF.Accidental("#"));
       }
       if (noteName.includes("b")) {
-        staveNote.addModifier(new VF.Accidental("b"), 0);
+        staveNote.addModifier(0, new VF.Accidental("b"));
       }
 
       return staveNote;
@@ -876,7 +876,7 @@ class Visual {
 
     // ✅ 3. create voice
     const voice = new VF.Voice({
-      num_beats: 4,
+      num_beats: notes.length,
       beat_value: 4
     });
 
