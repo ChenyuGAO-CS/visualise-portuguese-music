@@ -575,7 +575,15 @@ class Visual {
     console.log("occID:", occID)
     self.param.hier = self.param.compObj.layer[self.param.compObj.layer.length -1][occID]
     self.render()
-    
+
+    let notesData = [
+      [120,55,"E3",0.5],
+      [120,57,"G#3",2],
+      [120,59,"B3",2],
+      [122,58,"A3",0.5],
+      [122.5,66,"B4",1],
+    ]
+    renderFullStaff(notesData)
   }
   
 
@@ -825,6 +833,82 @@ class Visual {
           )
       })
     })
+  }
+
+  renderFullStaff(noteList) {
+    const VF = Vex.Flow;
+
+    document.getElementById("staff").innerHTML = "";
+
+    const div = document.getElementById("staff");
+    const renderer = new VF.Renderer(div, VF.Renderer.Backends.SVG);
+
+    renderer.resize(800, 200);
+    const context = renderer.getContext();
+
+    const stave = new VF.Stave(10, 40, 750);
+    stave.addClef("treble").setContext(context).draw();
+
+    // ✅ 1. sort note through ontime
+    noteList.sort((a, b) => a[0] - b[0]);
+
+    // ✅ 2. Change to VexFlow notes
+    const notes = noteList.map(n => {
+      const noteName = n[2];
+      const duration = convertDuration(n[3]);
+
+      const staveNote = new VF.StaveNote({
+        clef: "treble",
+        keys: [convertToVexNote(noteName)],
+        duration: duration
+      });
+
+      if (noteName.includes("#")) {
+        staveNote.addModifier(new VF.Accidental("#"), 0);
+      }
+      if (noteName.includes("b")) {
+        staveNote.addModifier(new VF.Accidental("b"), 0);
+      }
+
+      return staveNote;
+    });
+
+    // ✅ 3. create voice
+    const voice = new VF.Voice({
+      num_beats: 4,
+      beat_value: 4
+    });
+
+    voice.addTickables(notes);
+
+    // ✅ 4. Automatic formatting
+    new VF.Formatter().joinVoices([voice]).format([voice], 700);
+
+    // ✅ 5. draw
+    voice.draw(context, stave);
+  }
+
+  // change format: C4 → c/4
+  convertToVexNote(note) {
+      const pitch = note[0].toLowerCase();
+      const octave = note[note.length - 1];
+      return pitch + "/" + octave;
+  }
+  convertDuration(d) {
+    if (d === 0.5) return "8";
+    if (d === 1) return "q";
+    if (d === 2) return "h";
+    if (d === 4) return "w";
+    return "q"; 
+  }
+  convertToVexNote(note) {
+    let pitch = note[0].toLowerCase();
+    let octave = note.slice(-1);
+
+    if (note.includes("#")) pitch += "#";
+    if (note.includes("b")) pitch += "b";
+
+    return pitch + "/" + octave;
   }
 }
 

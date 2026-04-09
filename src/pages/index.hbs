@@ -15,6 +15,7 @@
     <title>{{seo.title}}</title>
     
     <!-- Meta tags for SEO and social sharing -->
+    <script src="https://unpkg.com/vexflow/releases/vexflow-min.js"></script>
     <link rel="canonical" href="{{seo.url}}">
     <meta name="description" content="{{seo.description}}">
     <meta property="og:title" content="{{seo.title}}">
@@ -161,10 +162,8 @@
 <!--       </div> -->
     </div>
     {{!-- for sheet music visualiser --}}
-    <div class="mui-col-md-8">
-      <div id="notezone" style="position:relative">
-        <canvas id="thecanvas"></canvas>
-      </div>
+    <div id="staff-container" style="margin-top:20px;">
+      <div id="staff"></div>
     </div>
     <!-- The footer holds our remix button — you can use it for structure or cut it out ✂ -->
     <footer class="footer">
