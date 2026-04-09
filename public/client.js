@@ -850,10 +850,10 @@ class Visual {
     const stave = new VF.Stave(10, 40, 750);
     stave.addClef("treble").setContext(context).draw();
 
-    // ✅ 1. sort note through ontime
+    // sort note through ontime
     noteList.sort((a, b) => a[0] - b[0]);
 
-    // ✅ 2. Change to VexFlow notes
+    // Change to VexFlow notes
     const notes = noteList.map(n => {
       const noteName = n[2];
       const duration = this.convertDuration(n[3]);
@@ -874,18 +874,20 @@ class Visual {
       return staveNote;
     });
 
-    // ✅ 3. create voice
+    // create voice
+    const totalBeats = noteList.reduce((sum, n) => sum + n[3], 0);
+
     const voice = new VF.Voice({
-      num_beats: notes.length,
+      num_beats: totalBeats,
       beat_value: 4
     });
 
     voice.addTickables(notes);
 
-    // ✅ 4. Automatic formatting
+    // Automatic formatting
     new VF.Formatter().joinVoices([voice]).format([voice], 700);
 
-    // ✅ 5. draw
+    // draw
     voice.draw(context, stave);
   }
 
