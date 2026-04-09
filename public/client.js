@@ -836,6 +836,7 @@ class Visual {
   }
 
   renderFullStaff(noteList) {
+    console.log("Hi renderFullStaff")
     const VF = Vex.Flow;
 
     document.getElementById("staff").innerHTML = "";
