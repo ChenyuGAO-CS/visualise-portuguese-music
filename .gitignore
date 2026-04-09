@@ -1,0 +1,36 @@
+# Dependency directories
+node_modules/
+
+# OS
+.DS_Store
+
+# Audio
+*.mp3
+*.wav
+
+# Symbolic
+*.mid
+*.mscz
+
+# Images
+*.png
+
+# Data directories
+examples/stm/
+examples/out/
+
+# Data files maybe?
+# *.json
+public/show_one/fields_of_athenry_the.js
+public/show_one/first_of_may.js
+
+# Logs
+package-lock.json
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+
+.idea
