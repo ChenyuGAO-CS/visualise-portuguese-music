@@ -583,7 +583,7 @@ class Visual {
       [122,58,"A3",0.5],
       [122.5,66,"B4",1],
     ]
-    renderFullStaff(notesData)
+    self.renderFullStaff(notesData)
   }
   
 
