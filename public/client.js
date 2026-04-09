@@ -856,11 +856,11 @@ class Visual {
     // ✅ 2. Change to VexFlow notes
     const notes = noteList.map(n => {
       const noteName = n[2];
-      const duration = convertDuration(n[3]);
+      const duration = this.convertDuration(n[3]);
 
       const staveNote = new VF.StaveNote({
         clef: "treble",
-        keys: [convertToVexNote(noteName)],
+        keys: [this.convertToVexNote(noteName)],
         duration: duration
       });
 
