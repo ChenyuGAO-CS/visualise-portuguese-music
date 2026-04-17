@@ -845,10 +845,27 @@ class Visual {
   renderer.resize(900, 250);
   const context = renderer.getContext();
 
+  // 1. grouping chord 
   const grouped = this.groupByOntime(noteList);
-  const chords = grouped.map(g => this.buildChord(g)).filter(Boolean);
-  const measures = this.splitMeasures(chords);
 
+  // 2. convert chord + ontime
+  const events = grouped.map(g => {
+    const ontime = g[0][0];
+    const chord = this.buildChord(g);
+    return {
+      ontime: ontime,
+      duration: chord.duration,
+      note: chord.note
+    };
+  });
+
+  // 3. build time sequence with rest
+  const sequence = this.buildSequenceWithRests(events);
+
+  // 4. split measures
+  const measures = this.splitMeasures(sequence);
+
+  // 5. drawing notation
   let x = 10;
 
   measures.forEach((measure, idx) => {
@@ -856,30 +873,12 @@ class Visual {
     if (idx === 0) stave.addClef("treble");
     stave.setContext(context).draw();
 
-    let notes = measure.map(c => c.note);
-
-    // rest
-    let total = measure.reduce((sum, c) => sum + c.duration, 0);
-    let remaining = 4 - total;
-
-    while (remaining > 0) {
-      let dur = remaining >= 1 ? 1 : 0.5;
-
-      notes.push(new VF.StaveNote({
-        clef: "treble",
-        keys: ["b/4"],   //
-        duration: this.convertDuration(dur) + "r"
-      }));
-
-      remaining -= dur;
-    }
-
     const voice = new VF.Voice({
       num_beats: 4,
       beat_value: 4
     });
 
-    voice.addTickables(notes);
+    voice.addTickables(measure);
 
     new VF.Formatter().joinVoices([voice]).format([voice], 120);
     voice.draw(context, stave);
@@ -888,6 +887,38 @@ class Visual {
   });
 }
 
+  buildSequenceWithRests(events) {
+    const VF = Vex.Flow;
+
+    let sequence = [];
+    let cursor = 0;
+
+    events.forEach(ev => {
+      // Insert rest
+      if (ev.ontime > cursor) {
+        let gap = ev.ontime - cursor;
+
+        while (gap > 0) {
+          let dur = gap >= 1 ? 1 : 0.5;
+
+          sequence.push(new VF.StaveNote({
+            clef: "treble",
+            keys: ["b/4"],
+            duration: this.convertDuration(dur) + "r"
+          }));
+
+          gap -= dur;
+          cursor += dur;
+        }
+      }
+
+      // insert notes
+      sequence.push(ev.note);
+      cursor += ev.duration;
+    });
+
+    return sequence;
+  }
   // Group notes by ontime
   groupByOntime(noteList) {
     const map = new Map();
@@ -943,43 +974,53 @@ class Visual {
   }
 
   // Max 5 bars
-  splitMeasures(chords) {
-    if (!Array.isArray(chords)) {
-      console.error("chords error:", chords);
-      return [];
-    }
-
+  splitMeasures(sequence) {
     const measures = [];
     let current = [];
     let sum = 0;
 
-    for (let i = 0; i < chords.length; i++) {
-      const c = chords[i];
+    sequence.forEach(note => {
+      const dur = this.getDurationFromNote(note);
 
-      if (!c || typeof c.duration !== "number") {
-        console.error("Unexpected chord:", c);
-        continue;
-      }
-
-      if (sum + c.duration > 4) {
+      if (sum + dur > 4) {
         measures.push(current);
         current = [];
         sum = 0;
       }
 
-      current.push(c);
-      sum += c.duration;
+      current.push(note);
+      sum += dur;
+    });
+    // Fill in the last quarter note
+    if (sum < 4) {
+      let remaining = 4 - sum;
 
-      if (measures.length === 4) {
-        break;
+      while (remaining > 0) {
+        let dur = remaining >= 1 ? 1 : 0.5;
+
+        current.push(new Vex.Flow.StaveNote({
+          clef: "treble",
+          keys: ["b/4"],
+          duration: this.convertDuration(dur) + "r"
+        }));
+
+        remaining -= dur;
       }
     }
 
-    if (current.length > 0 && measures.length < 5) {
-      measures.push(current);
-    }
+    if (current.length > 0) measures.push(current);
 
-    return measures;
+    return measures.slice(0, 5);
+  }
+  getDurationFromNote(note) {
+    const d = note.getDuration();
+
+    if (d === "q") return 1;
+    if (d === "8") return 0.5;
+    if (d === "h") return 2;
+    if (d === "w") return 4;
+
+    return 1;
   }
   // change format: C4 → c/4
   convertDuration(d) {
