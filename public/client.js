@@ -848,9 +848,9 @@ class Visual {
     //prepare notes
     const grouped = this.groupByOntime(noteList);
 
-    const chords = grouped.map(g => buildChord(g));
+    const chords = grouped.map(g => this.buildChord(g));
 
-    const measures = splitMeasures(chords);
+    const measures = this.splitMeasures(chords);
 
     let x = 10;
 
