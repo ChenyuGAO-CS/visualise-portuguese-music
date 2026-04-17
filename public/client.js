@@ -574,16 +574,19 @@ class Visual {
     const occID = parseInt(self.inp.value())
     console.log("occID:", occID)
     self.param.hier = self.param.compObj.layer[self.param.compObj.layer.length -1][occID]
-    console.log("self.param.hier", self.param.hier)
+    // console.log("self.param.hier", self.param.hier)
     self.render()
 
-    let notesData = [
-      [0,55,"E3",0.5],
-      [0,57,"G#3",2],
-      [0,59,"B3",2],
-      [2,58,"A3",0.5],
-      [2.5,66,"B4",1],
-    ]
+    let occKey = "occurrence"+occID.toString()
+    let notesData = self.param.hier["occurrences"][occKey]
+    console.log("notesData", notesData)
+    // let notesData = [
+    //   [0,55,"E3",0.5],
+    //   [0,57,"G#3",2],
+    //   [0,59,"B3",2],
+    //   [2,58,"A3",0.5],
+    //   [2.5,66,"B4",1],
+    // ]
     self.renderFullStaff(notesData)
   }
   
