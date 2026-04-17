@@ -856,7 +856,7 @@ class Visual {
   const context = renderer.getContext();
 
   let newNoteList = []
-  for(let i = 0 ; i < notesData.length; i ++){
+  for(let i = 0 ; i < noteList.length; i ++){
     newNoteList.push([noteList[i][0] - noteList[0][0], noteList[i][1], noteList[i][2], noteList[i][3]])
   }
   // 1. grouping chord 
