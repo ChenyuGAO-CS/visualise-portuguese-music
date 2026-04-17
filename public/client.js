@@ -848,7 +848,7 @@ class Visual {
     //prepare notes
     const grouped = this.groupByOntime(noteList);
 
-    const chords = chords = grouped
+    const chords = grouped
       .map(g => this.buildChord(g))
       .filter(c => c !== null);
 
