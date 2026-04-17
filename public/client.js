@@ -578,11 +578,13 @@ class Visual {
     self.render()
 
     let occKey = "occurrence"+occID.toString()
-    let notesData = self.param.hier["occurrences"][occKey]
-    console.log("notesData", notesData)
+    let oldNotesData = self.param.hier["occurrences"][occKey]
+    // console.log("notesData", notesData)
+    let notesData = []
     for(let i = 0 ; i < notesData.length; i ++){
-      notesData[i][0] = notesData[i][0] - notesData[0][0]
+      notesData.push([oldNotesData[i][0] - oldNotesData[0][0], oldNotesData[i][1], oldNotesData[i][2], oldNotesData[i][3]])
     }
+    console.log("notesData", notesData)
     // let notesData = [
     //   [0,55,"E3",0.5],
     //   [0,57,"G#3",2],
