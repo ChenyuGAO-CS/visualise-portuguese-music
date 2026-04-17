@@ -574,6 +574,7 @@ class Visual {
     const occID = parseInt(self.inp.value())
     console.log("occID:", occID)
     self.param.hier = self.param.compObj.layer[self.param.compObj.layer.length -1][occID]
+    console.log("self.param.hier", self.param.hier)
     self.render()
 
     let notesData = [
