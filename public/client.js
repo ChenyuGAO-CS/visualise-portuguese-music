@@ -853,7 +853,8 @@ class Visual {
       .filter(c => c !== null);
 
     const measures = this.splitMeasures(chords);
-    console.log("measures", measures)
+    console.log("chords =", chords);
+    console.log("measures =", measures);
 
     let x = 10;
 
@@ -939,11 +940,23 @@ class Visual {
 
   // Max 5 bars
   splitMeasures(chords) {
+    if (!Array.isArray(chords)) {
+      console.error("chords error:", chords);
+      return [];
+    }
+
     const measures = [];
     let current = [];
     let sum = 0;
 
-    chords.forEach(c => {
+    for (let i = 0; i < chords.length; i++) {
+      const c = chords[i];
+
+      if (!c || typeof c.duration !== "number") {
+        console.error("Unexpected chord:", c);
+        continue;
+      }
+
       if (sum + c.duration > 4) {
         measures.push(current);
         current = [];
@@ -953,12 +966,16 @@ class Visual {
       current.push(c);
       sum += c.duration;
 
-      // Restrict measures
-      if (measures.length === 4 && sum >= 4) {
-        measures.push(current);
-        return;
+      if (measures.length === 4) {
+        break;
       }
-    });
+    }
+
+    if (current.length > 0 && measures.length < 5) {
+      measures.push(current);
+    }
+
+    return measures;
   }
   // change format: C4 → c/4
   convertDuration(d) {
