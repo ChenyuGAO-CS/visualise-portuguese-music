@@ -851,6 +851,7 @@ class Visual {
     const chords = grouped.map(g => this.buildChord(g));
 
     const measures = this.splitMeasures(chords);
+    console.log("measures", measures)
 
     let x = 10;
 
