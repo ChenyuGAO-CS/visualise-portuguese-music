@@ -836,53 +836,57 @@ class Visual {
   }
 
   renderFullStaff(noteList) {
-    const VF = Vex.Flow;
+  const VF = Vex.Flow;
 
-    document.getElementById("staff").innerHTML = "";
+  const div = document.getElementById("staff");
+  div.innerHTML = "";
 
-    const div = document.getElementById("staff");
-    const renderer = new VF.Renderer(div, VF.Renderer.Backends.SVG);
+  const renderer = new VF.Renderer(div, VF.Renderer.Backends.SVG);
+  renderer.resize(900, 250);
+  const context = renderer.getContext();
 
-    renderer.resize(900, 250);
-    const context = renderer.getContext();
-    //prepare notes
-    const grouped = this.groupByOntime(noteList);
+  const grouped = this.groupByOntime(noteList);
+  const chords = grouped.map(g => this.buildChord(g)).filter(Boolean);
+  const measures = this.splitMeasures(chords);
 
-    const chords = grouped
-      .map(g => this.buildChord(g))
-      .filter(c => c !== null);
+  let x = 10;
 
-    const measures = this.splitMeasures(chords);
-    console.log("chords =", chords);
-    console.log("measures =", measures);
+  measures.forEach((measure, idx) => {
+    const stave = new VF.Stave(x, 40, 160);
+    if (idx === 0) stave.addClef("treble");
+    stave.setContext(context).draw();
 
-    let x = 10;
+    let notes = measure.map(c => c.note);
 
-    measures.forEach((measure, idx) => {
-      const stave = new VF.Stave(x, 40, 160);
+    // rest
+    let total = measure.reduce((sum, c) => sum + c.duration, 0);
+    let remaining = 4 - total;
 
-      if (idx === 0) {
-        stave.addClef("treble");
-      }
+    while (remaining > 0) {
+      let dur = remaining >= 1 ? 1 : 0.5;
 
-      stave.setContext(context).draw();
+      notes.push(new VF.StaveNote({
+        clef: "treble",
+        keys: ["b/4"],   //
+        duration: this.convertDuration(dur) + "r"
+      }));
 
-      const notes = measure.map(c => c.note);
+      remaining -= dur;
+    }
 
-      const voice = new VF.Voice({
-        num_beats: 4,
-        beat_value: 4
-      });
-
-      voice.addTickables(notes);
-
-      new VF.Formatter().joinVoices([voice]).format([voice], 120);
-
-      voice.draw(context, stave);
-
-      x += 170;
+    const voice = new VF.Voice({
+      num_beats: 4,
+      beat_value: 4
     });
-  }
+
+    voice.addTickables(notes);
+
+    new VF.Formatter().joinVoices([voice]).format([voice], 120);
+    voice.draw(context, stave);
+
+    x += 170;
+  });
+}
 
   // Group notes by ontime
   groupByOntime(noteList) {
