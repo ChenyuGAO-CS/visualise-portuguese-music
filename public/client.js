@@ -848,7 +848,9 @@ class Visual {
     //prepare notes
     const grouped = this.groupByOntime(noteList);
 
-    const chords = grouped.map(g => this.buildChord(g));
+    const chords = chords = grouped
+      .map(g => this.buildChord(g))
+      .filter(c => c !== null);
 
     const measures = this.splitMeasures(chords);
     console.log("measures", measures)
@@ -883,26 +885,29 @@ class Visual {
 
   // Group notes by ontime
   groupByOntime(noteList) {
-    const map = {};
+    const map = new Map();
 
     noteList.forEach(n => {
       const ontime = n[0];
 
-      if (!map[ontime]) {
-        map[ontime] = [];
+      if (!map.has(ontime)) {
+        map.set(ontime, []);
       }
 
-      map[ontime].push(n);
+      map.get(ontime).push(n);
     });
 
-    // As array
-    return Object.keys(map)
-      .map(k => map[k])
-      .sort((a, b) => a[0][0] - b[0][0]);
+    return Array.from(map.entries())
+      .sort((a, b) => a[0] - b[0])
+      .map(entry => entry[1]);
   }
 
   // build chord note
   buildChord(group) {
+    if (!group || !Array.isArray(group)) {
+      console.error("Unexpected group:", group);
+      return null;
+    }
     const VF = Vex.Flow;
 
     const keys = group.map(n => this.convertToVexNote(n[2]));
