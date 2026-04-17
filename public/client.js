@@ -904,11 +904,11 @@ class Visual {
   buildChord(group) {
     const VF = Vex.Flow;
 
-    const keys = group.map(n => convertToVexNote(n[2]));
+    const keys = group.map(n => this.convertToVexNote(n[2]));
 
     const maxDuration = Math.max(...group.map(n => n[3]));
 
-    const duration = convertDuration(maxDuration);
+    const duration = this.convertDuration(maxDuration);
 
     const note = new VF.StaveNote({
       clef: "treble",
@@ -955,11 +955,6 @@ class Visual {
     });
   }
   // change format: C4 → c/4
-  convertToVexNote(note) {
-      const pitch = note[0].toLowerCase();
-      const octave = note[note.length - 1];
-      return pitch + "/" + octave;
-  }
   convertDuration(d) {
     if (d === 0.5) return "8";
     if (d === 1) return "q";
