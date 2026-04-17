@@ -859,8 +859,9 @@ class Visual {
   for(let i = 0 ; i < noteList.length; i ++){
     newNoteList.push([noteList[i][0] - noteList[0][0], noteList[i][1], noteList[i][2], noteList[i][3]])
   }
+  console.log("newNoteList", newNoteList)
   // 1. grouping chord 
-  const grouped = this.groupByOntime(noteList);
+  const grouped = this.groupByOntime(newNoteList);
 
   // 2. convert chord + ontime
   const events = grouped.map(g => {
