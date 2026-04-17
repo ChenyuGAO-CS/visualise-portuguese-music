@@ -575,7 +575,6 @@ class Visual {
     console.log("occID:", occID)
     self.param.hier = self.param.compObj.layer[self.param.compObj.layer.length -1][occID]
     // console.log("self.param.hier", self.param.hier)
-    self.render()
 
     let occKey = "occurrence"+occID.toString()
     let oldNotesData = self.param.hier["occurrences"][occKey]
@@ -593,6 +592,8 @@ class Visual {
     //   [2.5,66,"B4",1],
     // ]
     self.renderFullStaff(notesData)
+
+    self.render()
   }
   
 
