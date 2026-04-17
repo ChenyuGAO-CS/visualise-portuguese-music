@@ -836,7 +836,6 @@ class Visual {
   }
 
   renderFullStaff(noteList) {
-    console.log("Hi renderFullStaff")
     const VF = Vex.Flow;
 
     document.getElementById("staff").innerHTML = "";
@@ -844,53 +843,116 @@ class Visual {
     const div = document.getElementById("staff");
     const renderer = new VF.Renderer(div, VF.Renderer.Backends.SVG);
 
-    renderer.resize(800, 200);
+    renderer.resize(900, 250);
     const context = renderer.getContext();
+    //prepare notes
+    const grouped = this.groupByOntime(noteList);
 
-    const stave = new VF.Stave(10, 40, 750);
-    stave.addClef("treble").setContext(context).draw();
+    const chords = grouped.map(g => buildChord(g));
 
-    // sort note through ontime
-    noteList.sort((a, b) => a[0] - b[0]);
+    const measures = splitMeasures(chords);
 
-    // Change to VexFlow notes
-    const notes = noteList.map(n => {
-      const noteName = n[2];
-      const duration = this.convertDuration(n[3]);
+    let x = 10;
 
-      const staveNote = new VF.StaveNote({
-        clef: "treble",
-        keys: [this.convertToVexNote(noteName)],
-        duration: duration
+    measures.forEach((measure, idx) => {
+      const stave = new VF.Stave(x, 40, 160);
+
+      if (idx === 0) {
+        stave.addClef("treble");
+      }
+
+      stave.setContext(context).draw();
+
+      const notes = measure.map(c => c.note);
+
+      const voice = new VF.Voice({
+        num_beats: 4,
+        beat_value: 4
       });
 
-      if (noteName.includes("#")) {
-        staveNote.addModifier(0, new VF.Accidental("#"));
-      }
-      if (noteName.includes("b")) {
-        staveNote.addModifier(0, new VF.Accidental("b"));
-      }
+      voice.addTickables(notes);
 
-      return staveNote;
+      new VF.Formatter().joinVoices([voice]).format([voice], 120);
+
+      voice.draw(context, stave);
+
+      x += 170;
     });
-
-    // create voice
-    const totalBeats = noteList.reduce((sum, n) => sum + n[3], 0);
-
-    const voice = new VF.Voice({
-      num_beats: totalBeats,
-      beat_value: 4
-    });
-
-    voice.addTickables(notes);
-
-    // Automatic formatting
-    new VF.Formatter().joinVoices([voice]).format([voice], 700);
-
-    // draw
-    voice.draw(context, stave);
   }
 
+  // Group notes by ontime
+  groupByOntime(noteList) {
+    const map = {};
+
+    noteList.forEach(n => {
+      const ontime = n[0];
+
+      if (!map[ontime]) {
+        map[ontime] = [];
+      }
+
+      map[ontime].push(n);
+    });
+
+    // As array
+    return Object.keys(map)
+      .map(k => map[k])
+      .sort((a, b) => a[0][0] - b[0][0]);
+  }
+
+  // build chord note
+  buildChord(group) {
+    const VF = Vex.Flow;
+
+    const keys = group.map(n => convertToVexNote(n[2]));
+
+    const maxDuration = Math.max(...group.map(n => n[3]));
+
+    const duration = convertDuration(maxDuration);
+
+    const note = new VF.StaveNote({
+      clef: "treble",
+      keys: keys,
+      duration: duration
+    });
+
+    group.forEach((n, i) => {
+      if (n[2].includes("#")) {
+        note.addModifier(i, new VF.Accidental("#"));
+      }
+      if (n[2].includes("b")) {
+        note.addModifier(i, new VF.Accidental("b"));
+      }
+    });
+
+    return {
+      note: note,
+      duration: maxDuration
+    };
+  }
+
+  // Max 5 bars
+  splitMeasures(chords) {
+    const measures = [];
+    let current = [];
+    let sum = 0;
+
+    chords.forEach(c => {
+      if (sum + c.duration > 4) {
+        measures.push(current);
+        current = [];
+        sum = 0;
+      }
+
+      current.push(c);
+      sum += c.duration;
+
+      // Restrict measures
+      if (measures.length === 4 && sum >= 4) {
+        measures.push(current);
+        return;
+      }
+    });
   // change format: C4 → c/4
   convertToVexNote(note) {
       const pitch = note[0].toLowerCase();
