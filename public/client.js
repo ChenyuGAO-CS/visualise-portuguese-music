@@ -577,12 +577,12 @@ class Visual {
     // console.log("self.param.hier", self.param.hier)
 
     let occKey = "occurrence"+occID.toString()
-    let oldNotesData = self.param.hier["occurrences"][occKey]
-    // console.log("notesData", notesData)
-    let notesData = []
-    for(let i = 0 ; i < notesData.length; i ++){
-      notesData.push([oldNotesData[i][0] - oldNotesData[0][0], oldNotesData[i][1], oldNotesData[i][2], oldNotesData[i][3]])
-    }
+    let notesData = self.param.hier["occurrences"][occKey]
+    // // console.log("notesData", notesData)
+    // let notesData = []
+    // for(let i = 0 ; i < notesData.length; i ++){
+    //   notesData.push([oldNotesData[i][0] - oldNotesData[0][0], oldNotesData[i][1], oldNotesData[i][2], oldNotesData[i][3]])
+    // }
     console.log("notesData", notesData)
     // let notesData = [
     //   [0,55,"E3",0.5],
@@ -855,6 +855,10 @@ class Visual {
   renderer.resize(900, 250);
   const context = renderer.getContext();
 
+  let newNoteList = []
+  for(let i = 0 ; i < notesData.length; i ++){
+    newNoteList.push([noteList[i][0] - noteList[0][0], noteList[i][1], noteList[i][2], noteList[i][3]])
+  }
   // 1. grouping chord 
   const grouped = this.groupByOntime(noteList);
 
