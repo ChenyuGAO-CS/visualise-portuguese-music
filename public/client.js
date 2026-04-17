@@ -580,9 +580,9 @@ class Visual {
     let occKey = "occurrence"+occID.toString()
     let notesData = self.param.hier["occurrences"][occKey]
     console.log("notesData", notesData)
-    notesData.forEach(function(c){
-      c[0] = c[0] - notesData[0][0]
-    })
+    for(let i = 0 ; i < notesData.length; i ++){
+      notesData[i][0] = notesData[i][0] - notesData[0][0]
+    }
     // let notesData = [
     //   [0,55,"E3",0.5],
     //   [0,57,"G#3",2],
