@@ -953,6 +953,7 @@ class Visual {
         return;
       }
     });
+  }
   // change format: C4 → c/4
   convertToVexNote(note) {
       const pitch = note[0].toLowerCase();
