@@ -4,8 +4,8 @@ class Client {
   constructor(){
     new p5(this.load_sketch.bind(this), "lovelySketch")
   }
-  
-  
+
+
   load_sketch(p){
     const prm = {
       "canvasWidth": 1200,       // pixels
@@ -20,7 +20,7 @@ class Client {
       "compObj": co_MS,        // *Composition object loaded from file
       "fillCol": [              // Mapping of staffNo to fill colour
         "#F4D06F",
-        "#7b16f5", 
+        "#7b16f5",
         "#FF8811"
       ],
       "hier": co_MS.layer[co_MS.layer.length -1][0],      // *Hierarchy object loaded from file
@@ -46,7 +46,7 @@ class Client {
     }
     let myInterface
 
-    
+
     p.preload = function(){
       prm.trans.imgName.forEach(function(nam, idx){
         if (typeof nam === "string"){
@@ -61,10 +61,10 @@ class Client {
       })
     }
 
-    
+
     p.setup = function(){
       console.log("self:", self)
-      
+
       myInterface = new Interface(p, prm)
     }
 
@@ -86,7 +86,7 @@ class Client {
         if (Tone.context.state !== "running"){
           Tone.start()
           // Tone.context.resume()
-          
+
           // console.log(Tone.context.state)
         }
         // pno.triggerAttackRelease(
@@ -134,27 +134,27 @@ class Client {
     }
 
   }
-  
-  
+
+
   // Helper functions
   get_parameter_by_name(name){
     let match = RegExp('[?&]' + name + '=([^&]*)').exec(window.location.search);
     return match && decodeURIComponent(match[1].replace(/\+/g, ' '))
   }
-  
-  
+
+
   remove_children_of_element(id){
     const el = document.getElementById(id)
     while(el.firstChild){
       el.removeChild(el.firstChild)
     }
   }
-  
+
   make_a_break(){
     let br = document.createElement("br")
     return br
   }
-  
+
 }
 
 
@@ -230,14 +230,14 @@ class Visual {
     // this.myCells = []
     this.render()
   }
-  
-  
+
+
   change_piece_input(){
     const self = this
     // self.sk.textSize(16);
     // self.sk.textAlign(self.sk.RIGHT);
     // self.sk.text(
-    //   "Input a number (1-909) to select a song:", 
+    //   "Input a number (1-909) to select a song:",
     //   self.sk.width/4 - 10, self.sk.height/2 -10
     // )
 
@@ -260,8 +260,8 @@ class Visual {
       self.change_piece_submit.bind(self)
     )
   }
-  
-  
+
+
   change_piece_submit(){
     const self = this
     console.log("self.inps:", self.inps)
@@ -533,13 +533,13 @@ class Visual {
 
     self.render()
   }
-  
+
   change_occ_input(){
     const self = this
     // self.sk.textSize(16);
     // self.sk.textAlign(self.sk.RIGHT);
     // self.sk.text(
-    //   "Input a number (1-909) to select a song:", 
+    //   "Input a number (1-909) to select a song:",
     //   self.sk.width/4 - 10, self.sk.height/2 -10
     // )
 
@@ -563,14 +563,14 @@ class Visual {
       self.change_occurrence_submit.bind(self)
     )
   }
-  
+
   change_occurrence_submit(){
     const self = this
     console.log("self.inp:", self.inp)
     const upData = {
       "idOcc": self.inp.value()
     }
-    // Then, we should update the occ to be visualised. 
+    // Then, we should update the occ to be visualised.
     const occID = parseInt(self.inp.value())
     console.log("occID:", occID)
     self.param.hier = self.param.compObj.layer[self.param.compObj.layer.length -1][occID]
@@ -583,6 +583,7 @@ class Visual {
     // for(let i = 0 ; i < notesData.length; i ++){
     //   notesData.push([oldNotesData[i][0] - oldNotesData[0][0], oldNotesData[i][1], oldNotesData[i][2], oldNotesData[i][3]])
     // }
+    // Checking ability to push.
     console.log("notesData", notesData)
     // let notesData = [
     //   [0,55,"E3",0.5],
@@ -595,14 +596,14 @@ class Visual {
 
     self.render()
   }
-  
+
 
   render(){
     const self = this
     const prm = self.param
     const notes = prm.compObj.notes
     const maxOntimeCurrent = notes[notes.length-1].ontime
-    
+
     self.myCells = []
     // Draw rectangle for buttons and textInput box in the first line.
     self.sk.background("#2e261f")
@@ -652,17 +653,17 @@ class Visual {
 
 
     // Draw pendular tree.
-    const hier_gt = prm.hier["occurrences"] // Read the first occ set. 
+    const hier_gt = prm.hier["occurrences"] // Read the first occ set.
     console.log("prm.hier[0][occurrences]", prm.hier["occurrences"])
     const occ_key = Object.keys(hier_gt)
     console.log(occ_key.length)
-    
+
     // Then draw circle for each occurrence.
     const max_depth = 1
     let count_node = 0
     let totalBarCount = 0
 
-    
+
     totalBarCount = Math.ceil((notes[notes.length-1].offtime)/4)
     console.log("Total bar count: ", totalBarCount)
     // self.sk.line(1, 100, 100, 100)
@@ -698,7 +699,7 @@ class Visual {
     const interval_two_octave = self.sk.map(
         MNN_y_axis[1], prm.screenBRepresents, prm.screenTRepresents,
         prm.canvasHeight/2 - 2*prm.gridMargin, prm.gridMargin
-      ) - 
+      ) -
       self.sk.map(
         MNN_y_axis[0], prm.screenBRepresents, prm.screenTRepresents,
         prm.canvasHeight/2 - 2*prm.gridMargin, prm.gridMargin
@@ -806,8 +807,8 @@ class Visual {
         1 // Little bit of rounding on the edges
       )
     })
-    
-    // Draw occurrences 
+
+    // Draw occurrences
     self.myCells.forEach(function(c){
       c.notes.forEach(function(n){
           // Determine horizontal coordinates.
@@ -860,7 +861,7 @@ class Visual {
     newNoteList.push([noteList[i][0] - noteList[0][0], noteList[i][1], noteList[i][2], noteList[i][3]])
   }
   console.log("newNoteList", newNoteList)
-  // 1. grouping chord 
+  // 1. grouping chord
   const grouped = this.groupByOntime(newNoteList);
 
   // 2. convert chord + ontime
@@ -1043,7 +1044,7 @@ class Visual {
     if (d === 1) return "q";
     if (d === 2) return "h";
     if (d === 4) return "w";
-    return "q"; 
+    return "q";
   }
   convertToVexNote(note) {
     let pitch = note[0].toLowerCase();
@@ -1083,7 +1084,7 @@ class PendularTree {
         this.barStar, this.barCount, this.notes
     )
   }
-  
+
 
 }
 
