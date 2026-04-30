@@ -39,7 +39,7 @@ class Client {
         "buttons": null
       },
       "path": {
-        "img": "https://cdn.glitch.global/f917780f-8d1b-452f-80d8-6fe5f2d1ca07/"
+        "img": "img/"
       },
       "songName": "Mesquita_sorted",
       "beatsPerBar": 4
@@ -585,6 +585,9 @@ class Visual {
     // }
     // Checking ability to push.
     console.log("notesData", notesData)
+
+    console.log("self.param.compObj:", self.param.compObj)
+
     // let notesData = [
     //   [0,55,"E3",0.5],
     //   [0,57,"G#3",2],
@@ -592,9 +595,29 @@ class Visual {
     //   [2,58,"A3",0.5],
     //   [2.5,66,"B4",1],
     // ]
-    self.renderFullStaff(notesData)
 
-    self.render()
+    const the_canvas = document.getElementById("thecanvas");
+    const _param = {
+      "notationWidth": 1000,
+      // "ontime": 28.5,
+      // "offtime": 37.5,
+      // "ontime": 28.5,  // cumberland_hunt_the
+      // "offtime": 37.5, // cumberland_hunt_the
+      "colorNoteheads": true,
+      "hideStaveNames": true,
+      "logging": true,
+      "padding": {
+        "left": 25,
+        "right": 25,
+        "voice": 125
+      }
+    }
+
+    cobj2vex(the_canvas, self.param.compObj, _param)
+
+    // self.renderFullStaff(notesData)
+    //
+    // self.render()
   }
 
 

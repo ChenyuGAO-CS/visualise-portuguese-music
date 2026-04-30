@@ -3502,7 +3502,7 @@ function textnotes_by_bar_staff_voice(
 		// necessarily be in ontime (or any other) order. Ordering is accomplished
 		// by a later function � [create_ties](freshjam.vexflow#create_ties).
 
-		if (expressions.length == 0){
+		if (expressions == undefined || expressions.length == 0){
 			return undefined;
 		}
 
@@ -3778,7 +3778,7 @@ function cobj2vex(Canvas, compObj, param){
 		return non_hidden_staves_idx.indexOf(n.staffNo) >= 0;
 	});
 	// console.log('notes.slice(0, 10):', notes.slice(0, 10));
-	var rests = compObj.rests//||[]
+	var rests = compObj.rests||[]
 	if (param.logging){
 		console.log('rests pre-filter:', rests)
 	}
@@ -3856,14 +3856,22 @@ function cobj2vex(Canvas, compObj, param){
 	}
 
 	// Get page layout information.
-	var page_breaks = compObj.pageLayout.pageBreaks;
-  if (page_breaks == undefined) {
-    page_breaks = [];
-  }
-	var system_breaks = compObj.pageLayout.systemBreaks;
-	if (system_breaks == undefined) {
-    system_breaks = [];
-  }
+	var page_breaks, system_breaks
+	var page_layout = compObj.pageLayout
+	if (page_layout == undefined){
+		page_breaks = [];
+		system_breaks = [];
+	}
+	else {
+		page_breaks = compObj.pageLayout.pageBreaks;
+	  if (page_breaks == undefined) {
+	    page_breaks = [];
+	  }
+		system_breaks = compObj.pageLayout.systemBreaks;
+		if (system_breaks == undefined) {
+	    system_breaks = [];
+	  }
+	}
 	// console.log('system_breaks:');
 	// console.log(system_breaks);
 
